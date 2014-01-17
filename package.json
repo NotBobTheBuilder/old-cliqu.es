@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "test": "./node_modules/.bin/jshint --exclude node_modules ."
+  },
+  "dependencies": {
+    "passport": "~0.1.18",
+    "passport-twitter": "~1.0.2",
+    "express": "~3.4.8"
+  },
+  "devDependencies": {
+    "jshint": "~2.4.1"
+  }
+}

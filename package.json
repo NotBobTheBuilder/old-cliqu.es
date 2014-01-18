@@ -5,7 +5,9 @@
   "dependencies": {
     "passport": "~0.1.18",
     "passport-twitter": "~1.0.2",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "bookshelf": "~0.6.2",
+    "sqlite3": "~2.2.0"
   },
   "devDependencies": {
     "jshint": "~2.4.1"

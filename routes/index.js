@@ -1,8 +1,8 @@
 module.exports = function(app, models, config) {
 
   app.get("/events/:id", function(req, res) {
-    models.Event.forge({"id": parseInt(req.params.id, 10)})
-                .fetch()
+    models.Event.forge({"id": req.params.id})
+                .fetch({"withRelated": ["attendees", "organisers"]})
                 .exec(function(err, evt) {
 
       if (err !== null) return res.send(500, "");

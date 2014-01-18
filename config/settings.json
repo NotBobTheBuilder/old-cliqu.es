@@ -1,0 +1,11 @@
+{
+  "development": {
+    "db": {
+      "client": "sqlite3",
+      "connection": {
+        "filename": "./events.db"
+      }
+    },
+    "port": 1234
+  }
+}

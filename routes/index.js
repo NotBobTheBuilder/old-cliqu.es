@@ -9,8 +9,11 @@ module.exports = function(app, models, config) {
       if (evt === null) return res.send(404, "");
 
       res.format({
+        "text/html": function() {
+          res.render("attendee_list", evt.toJSON());
+        },
         "application/json": function() {
-          res.json(evt);
+          res.json(evt.toJSON());
         }
       });
     });

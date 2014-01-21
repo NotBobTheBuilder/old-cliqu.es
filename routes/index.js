@@ -1,4 +1,13 @@
-module.exports = function(app, models, config) {
+var models  = require("../models"),
+    config  = require("../config");
+
+module.exports = function(app, auth) {
+
+  app.get("/login", function(req, res) {
+    res.render("login");
+  });
+
+  app.post("/auth/:auth", auth.login);
 
   app.get("/events/:id", function(req, res) {
     models.Event.forge({"id": req.params.id})

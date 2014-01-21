@@ -8,7 +8,8 @@
     "express": "~3.4.8",
     "bookshelf": "~0.6.2",
     "sqlite3": "~2.2.0",
-    "mustachex": "0.0.2"
+    "mustachex": "0.0.2",
+    "passport-local": "~0.1.6"
   },
   "devDependencies": {
     "jshint": "~2.4.1"

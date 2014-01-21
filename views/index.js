@@ -5,4 +5,5 @@ module.exports = function(app) {
   app.engine("ics", mustachex.express);
   app.set("view engine", "mst");
   app.set("views", "./views/mustache");
+  app.set("layout", "site");
 };

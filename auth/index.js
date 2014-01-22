@@ -26,7 +26,7 @@ function login(req, res, next) {
 
 function loggedIn(req, res, next) {
   if(!req.isAuthenticated())
-    res.redirect("/login");
+    return res.redirect("/login");
   next();
 }
 

@@ -58,6 +58,7 @@ module.exports = function(app) {
 
   return {
     validate:   validateAuth,
+    loggedIn:   loggedIn,
     login:      login,
     hash:       hash,
     compare:    bcrypt.compare,

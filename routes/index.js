@@ -3,7 +3,7 @@ var models  = require("../models"),
 
 module.exports = function(app, auth, views) {
 
-  app.get("/login", function(req, res) {
+  app.get("/login", views.htmlOnly("/"), function(req, res) {
     res.render("login");
   });
 

@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//EVENTS//API//ICS
+{{#.}}
+BEGIN:VEVENT
+UID:{{id}}@events
+{{#times.start.ics}}DTSTART:i
+{{/times.start.ics}}{{#times.end.ics}}DTEND:
+{{/times.end.ics}}SUMMARY:{{title}}
+END:VEVENT
+{{/.}}
+END:VCALENDAR

@@ -9,6 +9,9 @@ module.exports = function(app, models, config) {
       if (evt === null) return res.send(404, "");
 
       res.format({
+        "text/calendar": function() {
+          res.render("event.ics", evt.toJSON());
+        },
         "text/html": function() {
           res.render("attendee_list", evt.toJSON());
         },

@@ -23,15 +23,17 @@ module.exports = function(app, auth, views) {
       }
       var resetKey = "0000-0000-0000-0000".replace(/0/g, randomChar);
 
-      //TODO: validate email address
-      models.User.forge({
-        "email": req.body.username,
-        "password": resetKey,
-        "awaitReset": 1,
-      }).save().exec(function(err, user) {
-        //TODO: Email reset key
-        console.log(resetKey);
-        res.redirect(303, "/users/" + user.id + "/reset");
+      auth.hash(resetKey, function(err, hashed) {
+        //TODO: validate email address
+        models.User.forge({
+          "email": req.body.username,
+          "password": hashed,
+          "awaitReset": 1,
+        }).save().exec(function(err, user) {
+          //TODO: Email reset key
+          console.log(resetKey);
+          res.redirect(303, "/users/" + user.id + "/reset");
+        });
       });
     });
   });
@@ -67,23 +69,27 @@ module.exports = function(app, auth, views) {
     }).fetch().exec(function(err, user) {
       if (user === null) return res.redirect(303, "/");
 
-      if (user.get("password") === req.body.resetCode) {
-        return user.save({
-          "password":   req.body.password,
-          "awaitReset": 0,
-        }, {
-          "patch": true
-        }).exec(function(err, user) {
-          if(err) {
-            res.send(500, "");
-          } else {
-            res.redirect(303, "/users/" + user.id);
-          }
-        });
-      }
+      auth.compare(req.body.resetCode, user.get("password"), function(err, eq) {
+        if (eq) {
+          return auth.hash(req.body.password, function(err, hashedPass) {
+            return user.save({
+              "password":   hashedPass,
+              "awaitReset": 0,
+            }, {
+              "patch": true
+            }).exec(function(err, user) {
+              if(err) {
+                res.send(500, "");
+              } else {
+                res.redirect(303, "/users/" + user.id);
+              }
+            });
+          });
+        }
 
-      /* Pin Incorrect */
-      res.send(303, "/users/" + user.id + "/reset");
+        /* Pin Incorrect */
+        res.redirect(303, "/users/" + user.id + "/reset");
+      });
     });
   });
 

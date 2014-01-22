@@ -1,8 +1,9 @@
 var config      = require("../config"),
     models      = require("../models"),
 
+    bcrypt      = require("bcrypt"),
     passport    = require("passport"),
-    local       = require("./local");
+    local       = require("./local")(hash);
 
 
 function validateAuth(req, res, next) {
@@ -39,6 +40,13 @@ function deserializeUser(id, done) {
              .exec(done);
 }
 
+function hash(string, cb) {
+  bcrypt.genSalt(function(err, salt) {
+    if (err) return cb(err);
+    bcrypt.hash(string, salt, cb);
+  });
+}
+
 module.exports = function(app) {
   app.use(passport.initialize());
   app.use(passport.session());
@@ -51,5 +59,7 @@ module.exports = function(app) {
   return {
     validate:   validateAuth,
     login:      login,
+    hash:       hash,
+    compare:    bcrypt.compare,
   };
 };

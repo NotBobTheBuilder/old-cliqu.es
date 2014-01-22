@@ -15,6 +15,7 @@ CREATE TABLE users (
   id                  INTEGER PRIMARY KEY AUTOINCREMENT,
   email,
   password,
+  awaitReset,
   display_name
 );
 
@@ -32,10 +33,10 @@ CREATE TABLE events_organisers (
 
 /*
 Possibly useful [trivial] test data
-*/
 INSERT INTO events  (title)             VALUES ("Event 1");
-INSERT INTO users   (display_name, email, password)      VALUES ("Foo Bar", "a@b", "password");
-INSERT INTO users   (display_name, email, password)      VALUES ("Example", "c@d", "password");
+INSERT INTO users   (display_name, email, password, awaitReset)      VALUES ("Foo Bar", "a@b", "password", 0);
+INSERT INTO users   (display_name, email, password, awaitReset)      VALUES ("Example", "c@d", "password", 0);
 INSERT INTO tickets (attendee_id, event_id) VALUES (1,1);
 
 INSERT INTO events_organisers (organiser_id, event_id) VALUES (2, 1);
+*/

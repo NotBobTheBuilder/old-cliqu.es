@@ -1,0 +1,8 @@
+<form method="post" action="/register">
+  <header>Register</header>
+  <dl>
+    <dt>Email</dt>
+    <dd><input type="text" name="username" /></dd>
+  </dl>
+  <input type="submit" value="Login" />
+</form>

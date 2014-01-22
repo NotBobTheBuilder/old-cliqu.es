@@ -14,7 +14,7 @@ app.use(express.session({"secret": config.sessionSecret}));
 
 auth    = auth(app);
 views   = views(app);
-routes  = routes(app, auth);
+routes  = routes(app, auth, views);
 
 app.listen(config.port);
 console.log("Now listening on port " + config.port + " on addresses:");

@@ -8,6 +8,6 @@ You're going to {{event.title}}!
 {{^user}}
 <form method="get" action="/login">
 {{/user}}
-<input type="submit" value"Get a ticket" />
+<input type="submit" value="Get a ticket" />
 </form>
 {{/ticket}}

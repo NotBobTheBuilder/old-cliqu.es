@@ -3,31 +3,22 @@ var config      = require("../config"),
 
     bcrypt      = require("bcrypt"),
     passport    = require("passport"),
-    twitter     = require("passport-twitter").Strategy;
+    twitter     = require("./twitter"),
     local       = require("./local")(bcrypt.compare);
 
-
-function validateAuth(req, res, next) {
-  console.log(req.params.auth);
-  if (req.params.auth == "local"){
-    if (! ("username" in req.body && "password" in req.body))
-      return next(new Error("email and password required"));
-  } else if(req.params.auth == "twitter") {
-  } else {
-    return next(new Error("Authentication Method Not Permitted"));
+function login(mechanism, mode) {
+  var redirects = {
+    "successRedirect": "/",
+    "failureRedirect": "/login",
+  };
+  switch(mechanism) {
+    case "local": return passport.authenticate("local", redirects);
+    case "twitter":
+      return {
+        "auth":     passport.authenticate("twitter"),
+        "callback": passport.authenticate("twitter", redirects),
+      }[mode];
   }
-  return next();
-}
-
-
-function login(req, res, next) {
-  validateAuth(req, res, function(err) {
-    if (err) return next(err);
-    passport.authenticate(req.params.auth, {
-      "successRedirect": "/",
-      "failureRedirect": "/login",
-    })(req, res, next);
-  });
 }
 
 function loggedIn(req, res, next) {
@@ -58,26 +49,14 @@ module.exports = function(app) {
   app.use(passport.session());
 
   passport.use(local);
-
-  passport.use(new twitter({
-    consumerKey: "D4ZfVI5PkwnvV0tTF8zeQw",
-    consumerSecret: "qM6hlrHynTL3dalUNTPJ0PMJP3o0HkrD6QvSIzW2G6o",
-    callbackURL: "http://127.0.0.1:1234/auth/twitter/callback"
-  },
-  function(token, tokenSecret, profile, done) {
-    console.log(token);
-    //User.findOrCreate(..., function(err, user) {
-    //  if (err) { return done(err); }
-    //  done(null, user);
-    //});
-}
-));
+  
+  if (config.twitter)
+    passport.use(twitter(config.twitter));
 
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
 
   return {
-    validate:   validateAuth,
     loggedIn:   loggedIn,
     login:      login,
     hash:       hash,

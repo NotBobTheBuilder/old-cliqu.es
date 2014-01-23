@@ -94,9 +94,9 @@ module.exports = function(app, auth, views) {
     });
   });
 
-  app.post("/auth/:auth", auth.login);
-  app.get("/auth/:auth", auth.login);
-  app.get("/auth/twitter/callback", auth.login);
+  app.post("/auth/local",           auth.login("local"));
+  app.get("/auth/twitter",          auth.login("twitter", "auth"));
+  app.get("/auth/twitter/callback", auth.login("twitter", "callback"));
 
   app.get("/events/:id", function(req, res) {
     models.Event.forge({"id": req.params.id})

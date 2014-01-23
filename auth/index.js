@@ -3,16 +3,23 @@ var config      = require("../config"),
 
     bcrypt      = require("bcrypt"),
     passport    = require("passport"),
+    twitter     = require("passport-twitter").Strategy;
     local       = require("./local")(bcrypt.compare);
 
 
 function validateAuth(req, res, next) {
-  if (req.params.auth !== "local")
+  console.log(req.params.auth);
+  if (req.params.auth == "local"){
+    if (! ("username" in req.body && "password" in req.body))
+      return next(new Error("email and password required"));
+  }
+  else if(req.params.auth == "twitter")
+    next(); //nop
+  else
     return next(new Error("Authentication Method Not Permitted"));
-  if (! ("username" in req.body && "password" in req.body))
-    return next(new Error("email and password required"));
   return next();
 }
+
 
 function login(req, res, next) {
   validateAuth(req, res, function(err) {
@@ -52,6 +59,20 @@ module.exports = function(app) {
   app.use(passport.session());
 
   passport.use(local);
+
+  passport.use(new twitter({
+    consumerKey: "D4ZfVI5PkwnvV0tTF8zeQw",
+    consumerSecret: "qM6hlrHynTL3dalUNTPJ0PMJP3o0HkrD6QvSIzW2G6o",
+    callbackURL: "http://127.0.0.1:1234/auth/twitter/callback"
+  },
+  function(token, tokenSecret, profile, done) {
+    console.log(token);
+    //User.findOrCreate(..., function(err, user) {
+    //  if (err) { return done(err); }
+    //  done(null, user);
+    //});
+}
+));
 
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);

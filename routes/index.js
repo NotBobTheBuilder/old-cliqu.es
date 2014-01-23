@@ -7,6 +7,7 @@ module.exports = function(app, auth, views) {
     res.render("login");
   });
 
+
   app.get("/register", views.htmlOnly("/"), function(req, res) {
     res.render("register");
   });
@@ -94,6 +95,8 @@ module.exports = function(app, auth, views) {
   });
 
   app.post("/auth/:auth", auth.login);
+  app.get("/auth/:auth", auth.login);
+  app.get("/auth/twitter/callback", auth.login);
 
   app.get("/events/:id", function(req, res) {
     models.Event.forge({"id": req.params.id})

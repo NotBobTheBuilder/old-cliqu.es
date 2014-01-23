@@ -1,0 +1,13 @@
+{{#ticket}}
+You're going to {{event.title}}!
+{{/ticket}}
+{{^ticket}}
+{{#user}}
+<form method="post" action="{{url}}">
+{{/user}}
+{{^user}}
+<form method="get" action="/login">
+{{/user}}
+<input type="submit" value="Get a ticket" />
+</form>
+{{/ticket}}

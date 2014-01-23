@@ -4,7 +4,7 @@ var models        = require("../models"),
     LocalStrategy = require("passport-local").Strategy;
 
 
-module.exports = function(hash) {
+module.exports = function(compare) {
   return new LocalStrategy(function(username, password, done) {
     models.User.forge({
       "email": username,
@@ -12,12 +12,9 @@ module.exports = function(hash) {
       if (err) return done(err);
       if (user === null) return done(null, false, badAuth);
 
-      hash(password, function(err, hashedPass) {
-        if (user.get("password") == hashedPass) {
-          return done(null, user);
-        } else {
-          return done(null, false, badAuth);
-        }
+      compare(password, user.get("password"), function(err, eq) {
+        return (eq) ? done(null, user)
+                    : done(null, false, badAuth);
       });
     });
   });

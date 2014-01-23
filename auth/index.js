@@ -3,7 +3,7 @@ var config      = require("../config"),
 
     bcrypt      = require("bcrypt"),
     passport    = require("passport"),
-    local       = require("./local")(hash);
+    local       = require("./local")(bcrypt.compare);
 
 
 function validateAuth(req, res, next) {

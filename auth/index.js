@@ -2,25 +2,22 @@ var models      = require("../models"),
 
     bcrypt      = require("bcrypt"),
     passport    = require("passport"),
+    twitter     = require("./twitter"),
     local       = require("./local")(bcrypt.compare);
 
-
-function validateAuth(req, res, next) {
-  if (req.params.auth !== "local")
-    return next(new Error("Authentication Method Not Permitted"));
-  if (! ("username" in req.body && "password" in req.body))
-    return next(new Error("email and password required"));
-  return next();
-}
-
-function login(req, res, next) {
-  validateAuth(req, res, function(err) {
-    if (err) return next(err);
-    passport.authenticate(req.params.auth, {
-      "successRedirect": "/",
-      "failureRedirect": "/login",
-    })(req, res, next);
-  });
+function login(mechanism, mode) {
+  var redirects = {
+    "successRedirect": "/",
+    "failureRedirect": "/login",
+  };
+  switch(mechanism) {
+    case "local": return passport.authenticate("local", redirects);
+    case "twitter":
+      return {
+        "auth":     passport.authenticate("twitter"),
+        "callback": passport.authenticate("twitter", redirects),
+      }[mode];
+  }
 }
 
 function loggedIn(req, res, next) {
@@ -51,12 +48,14 @@ module.exports = function(app) {
   app.use(passport.session());
 
   passport.use(local);
+  
+  if (config.twitter)
+    passport.use(twitter(config.twitter));
 
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
 
   return {
-    validate:   validateAuth,
     loggedIn:   loggedIn,
     login:      login,
     hash:       hash,

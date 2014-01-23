@@ -12,11 +12,10 @@ function validateAuth(req, res, next) {
   if (req.params.auth == "local"){
     if (! ("username" in req.body && "password" in req.body))
       return next(new Error("email and password required"));
-  }
-  else if(req.params.auth == "twitter")
-    next(); //nop
-  else
+  } else if(req.params.auth == "twitter") {
+  } else {
     return next(new Error("Authentication Method Not Permitted"));
+  }
   return next();
 }
 

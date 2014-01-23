@@ -3,7 +3,7 @@ var config      = require("../config"),
 
     bcrypt      = require("bcrypt"),
     passport    = require("passport"),
-    local       = require("./local")(hash);
+    local       = require("./local")(bcrypt.compare);
 
 
 function validateAuth(req, res, next) {
@@ -26,7 +26,7 @@ function login(req, res, next) {
 
 function loggedIn(req, res, next) {
   if(!req.isAuthenticated())
-    res.redirect("/login");
+    return res.redirect("/login");
   next();
 }
 
@@ -58,6 +58,7 @@ module.exports = function(app) {
 
   return {
     validate:   validateAuth,
+    loggedIn:   loggedIn,
     login:      login,
     hash:       hash,
     compare:    bcrypt.compare,

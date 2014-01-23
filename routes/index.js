@@ -1,4 +1,6 @@
-var models  = require("../models");
+var models  = require("../models"),
+
+    routes  = ["users", "events"];
 
 module.exports = function(app, auth, views) {
 
@@ -38,86 +40,7 @@ module.exports = function(app, auth, views) {
     });
   });
 
-  app.get("/users/:id", function(req, res) {
-    models.User.forge({
-      "id": req.params.id,
-    }).fetch().exec(function(err, user) {
-      //TODO: Html rendering of user pages
-      res.format({
-        "application/json": function() {
-          res.json(user.toJSON());
-        },
-      });
-    });
-  });
-
-  app.get("/users/:id/reset", views.htmlOnly("/"), function(req, res) {
-    models.User.forge({
-      "id": req.params.id,
-      "awaitReset": 1,
-    }).fetch().exec(function(err, user) {
-      if (user === null)
-        return res.redirect(303, "/");
-      res.render("reset-password", {user: user.toJSON()});
-    });
-  });
-
-  app.post("/users/:id/reset", function(req, res) {
-    models.User.forge({
-      "id": req.params.id,
-      "awaitReset": 1,
-    }).fetch().exec(function(err, user) {
-      if (user === null) return res.redirect(303, "/");
-
-      auth.compare(req.body.resetCode, user.get("password"), function(err, eq) {
-        if (eq) {
-          return auth.hash(req.body.password, function(err, hashedPass) {
-            return user.save({
-              "password":   hashedPass,
-              "awaitReset": 0,
-            }, {
-              "patch": true
-            }).exec(function(err, user) {
-              if(err) {
-                res.send(500, "");
-              } else {
-                res.redirect(303, "/users/" + user.id);
-              }
-            });
-          });
-        }
-
-        /* Pin Incorrect */
-        res.redirect(303, "/users/" + user.id + "/reset");
-      });
-    });
-  });
-
-  app.post("/auth/local",           auth.login("local"));
-  app.get("/auth/twitter",          auth.login("twitter", "auth"));
-  app.get("/auth/twitter/callback", auth.login("twitter", "callback"));
-
-  app.get("/events/:id", function(req, res) {
-    models.Event.forge({"id": req.params.id})
-                .fetch({"withRelated": ["attendees", "organisers"]})
-                .exec(function(err, evt) {
-
-      if (err !== null) return res.send(500, "");
-      if (evt === null) return res.send(404, "");
-
-      res.format({
-        "text/calendar": function() {
-          res.render("event.ics", evt.toJSON());
-        },
-        "text/html": function() {
-          res.render("attendee_list", evt.toJSON());
-        },
-        "application/json": function() {
-          res.json(evt.toJSON());
-        }
-      });
-    });
-  });
+  app.post("/auth/:auth", auth.login);
 
   app.get("/events/:id/ticket", function(req, res) {
     if (!req.user) {
@@ -190,5 +113,9 @@ module.exports = function(app, auth, views) {
         });
       });
     });
+  });
+
+  routes.map(function(route) {
+    require("./" + route)(app, auth, views);
   });
 };

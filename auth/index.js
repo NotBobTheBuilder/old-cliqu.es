@@ -1,4 +1,5 @@
 var models      = require("../models"),
+    config      = require("../config"),
 
     bcrypt      = require("bcrypt"),
     passport    = require("passport"),
@@ -11,7 +12,8 @@ function login(mechanism, mode) {
     "failureRedirect": "/login",
   };
   switch(mechanism) {
-    case "local": return passport.authenticate("local", redirects);
+    case "local":
+      return passport.authenticate("local", redirects);
     case "twitter":
       return {
         "auth":     passport.authenticate("twitter"),

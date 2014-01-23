@@ -1,6 +1,5 @@
 var db  = require("./db"),
     Event,
-    Group,
     Ticket,
     User;
 

@@ -1,5 +1,4 @@
-var models  = require("../models"),
-    config  = require("../config");
+var models  = require("../models");
 
 module.exports = function(app, auth, views) {
 

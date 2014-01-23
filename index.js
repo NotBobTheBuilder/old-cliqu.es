@@ -1,5 +1,4 @@
 var config    = require("./config"),
-    models    = require("./models"),
     routes    = require("./routes"),
     views     = require("./views"),
     auth      = require("./auth"),

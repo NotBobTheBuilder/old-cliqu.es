@@ -1,4 +1,8 @@
 {
+  "indent": 2,
+  "unused": true,
+  "undef": true,
+  "node": true,
   "camelcase": true,
   "quotmark": "double"
 }

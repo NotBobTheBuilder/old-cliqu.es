@@ -1,5 +1,4 @@
-var config      = require("../config"),
-    models      = require("../models"),
+var models      = require("../models"),
 
     bcrypt      = require("bcrypt"),
     passport    = require("passport"),

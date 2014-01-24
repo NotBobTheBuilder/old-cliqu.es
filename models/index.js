@@ -61,6 +61,12 @@ User = db.Model.extend({
   "organising": function() {
     return this.belongsToMany(Event, "events_organisers", "organiser_id", "event_id");
   },
+  "member": function() {
+    return this.belongsToMany(Group, "groups_members", "group_id", "member_id");
+  },
+  "organiser": function() {
+    return this.belongsToMany(Group, "groups_organisers", "group_id", "organiser_id");
+  },
 });
 User.Users = db.Collection.extend({
   "model": User,

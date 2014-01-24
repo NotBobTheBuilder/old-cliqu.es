@@ -3,14 +3,6 @@
     "twitter": {
       "key":    "",
       "secret": ""
-    },
-    "db": {
-      "client": "sqlite3",
-      "connection": {
-        "filename": "./events.db"
-      }
-    },
-    "sessionSecret": "super_secret_code_bro",
-    "port": 1234
+    }
   }
 }

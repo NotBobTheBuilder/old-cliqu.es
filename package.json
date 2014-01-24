@@ -10,7 +10,8 @@
     "sqlite3": "~2.2.0",
     "mustachex": "0.0.2",
     "passport-local": "~0.1.6",
-    "bcrypt": "~0.7.7"
+    "bcrypt": "~0.7.7",
+    "underscore": "~1.5.2"
   },
   "devDependencies": {
     "jshint": "~2.4.1"

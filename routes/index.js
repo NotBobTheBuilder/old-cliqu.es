@@ -1,6 +1,6 @@
 var models  = require("../models"),
 
-    routes  = ["users", "events"];
+    routes  = ["users", "events", "groups"];
 
 module.exports = function(app, auth, views) {
 

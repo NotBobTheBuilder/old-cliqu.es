@@ -1,9 +1,6 @@
 {
   "development": {
-    "twitter": {
-      "key":    "",
-      "secret": ""
-    },
+    "twitter": false,
     "db": {
       "client": "sqlite3",
       "connection": {

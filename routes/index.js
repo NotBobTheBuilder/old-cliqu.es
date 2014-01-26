@@ -4,6 +4,22 @@ var models  = require("../models"),
 
 module.exports = function(app, auth, views) {
 
+  app.use(function(req, res, next) {
+    if (req.host === "cliqu.es") {
+      req.group = null;
+      return next();
+    }
+    models.Group.forge({
+      "domain": req.host,
+    }).fetch().exec(function(err, group) {
+      if (err)    return res.send(500, "");
+      if (!group) return res.send(404, "");
+
+      req.group = group;
+      next();
+    });
+  });
+
   app.get("/login", views.htmlOnly("/"), function(req, res) {
     res.render("login");
   });

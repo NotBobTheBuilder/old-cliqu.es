@@ -5,7 +5,14 @@ module.exports = function(app, auth, views) {
   app.param("user", function(req, res, next, id) {
     models.User.forge({
       "id": id,
-    }).fetch().exec(function(err, user) {
+    }).fetch({
+      "withRelated": [
+        "attending",
+        "organising",
+        "organiser",
+        "member",
+      ],
+    }).exec(function(err, user) {
       if (err) return next(err);
       req.params.user = user;
       next();

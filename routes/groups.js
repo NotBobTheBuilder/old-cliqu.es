@@ -27,4 +27,20 @@ module.exports = function(app) {
       },
     });
   });
+
+  app.post("/groups/:group/github_pushed", function(req, res) {
+    if(req.params.group === null) return res.send(404, ""); 
+
+    var exec    = require("child_process").exec,
+        url     = req.body.repository.url,
+        domain  = req.params.group.get("domain");
+
+    res.send(202, "Processing");
+
+    exec("./clone-site.sh " + [domain, url].join(" "),
+    function(err, stdout, stderr) {
+      console.log("STDOUT: " + stdout);
+      console.log("STDERR: " + stderr);
+    });
+  });
 };

@@ -22,6 +22,9 @@ module.exports = function(app) {
     if (req.params.group === null) return res.send(404, "");
 
     res.format({
+      "text/html": function() {
+        res.redirect(302, "http://" + req.params.group.get("domain"));
+      },
       "application/json": function() {
         res.json(req.params.group.toJSON());
       },

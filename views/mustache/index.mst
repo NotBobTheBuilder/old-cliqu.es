@@ -1,0 +1,28 @@
+<article>
+  <section id="intro" class="container">
+  	<h1>Welcome to Cliqu.es</h1>
+    <h2>A service for better usergroup management</h2>
+  </section>
+  <section id="features">
+    <ul>
+      <li>
+        <span class="glyphicon glyphicon-globe"></span>
+        <h4>Hosted Websites</h4>
+        <p>Use cliqu.es to host your group's website</p>
+        <p>Easy configuration using a GitHub service hook</p>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-calendar"></span>
+        <h4>Run Events</h4>
+        <p>Easily host &amp; publish events online</p>
+        <p>Support for easy ticketing and iCal event feeds</p> 
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-envelope"></span>
+        <h4>Mailing Lists</h4>
+        <p>If your group already has a mailing list, link it in!</p>
+        <p>Otherwise, make one on cliques! Free for groups &lt;20 people</p>
+      </li>
+    </ul>
+  </section>
+</article>

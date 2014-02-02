@@ -1,22 +1,50 @@
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 
+body {
+  background-color: #2D4986;
+  color: #FFF;
+}
 
+h1, h2, h4 {
+  font-family: "Crete Round", "Sanchez";
+}
 
+section {
+  padding-top: 20px;
+  padding-bottom: 25px;
+  min-height: 400px;
+}
 
+#features {
+  background-color: #9D4034;
+}
 
+#features ul {
+  padding: 0 auto;
+      text-align: center;
+}
 
+#features li {
+  text-align: center;
+  list-style: none;
+  margin: 3%;
+  padding: 1%;
+  width: 25%;
+  min-width: 200px;
+  max-width: 275px;
+  height: 300px;
+}
 
+@media only screen and (min-width: 500px) {
+  #features li {
+    display: inline-block;
+    vertical-align: top;
+  }
+}
 
-
-
-
-
-
-
-
-
-
+#features .glyphicon {
+  font-size: 128px;
+  text-shadow: 4px 4px 1px #BBB;
+}

@@ -20,6 +20,10 @@ module.exports = function(app, auth, views) {
     });
   });
 
+  app.get("/", function(req, res) {
+    res.render("index");
+  });
+
   app.get("/login", views.htmlOnly("/"), function(req, res) {
     res.render("login");
   });

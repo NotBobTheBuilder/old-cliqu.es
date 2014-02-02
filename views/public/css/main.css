@@ -22,8 +22,8 @@ section {
 }
 
 #features ul {
-  padding: 0 auto;
-      text-align: center;
+  padding: 0;
+  text-align: center;
 }
 
 #features li {
@@ -31,9 +31,7 @@ section {
   list-style: none;
   margin: 3%;
   padding: 1%;
-  width: 25%;
   min-width: 200px;
-  max-width: 275px;
   height: 300px;
 }
 
@@ -41,10 +39,13 @@ section {
   #features li {
     display: inline-block;
     vertical-align: top;
+    width: 25%;
+    max-width: 275px;
   }
 }
 
 #features .glyphicon {
   font-size: 128px;
   text-shadow: 4px 4px 1px #BBB;
+  margin-bottom: 25px;
 }

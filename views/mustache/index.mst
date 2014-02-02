@@ -9,19 +9,19 @@
         <span class="glyphicon glyphicon-globe"></span>
         <h4>Hosted Websites</h4>
         <p>Use cliqu.es to host your group's website</p>
-        <p>Easy configuration using a GitHub service hook</p>
+        <p>Support for custom domains &amp; updates via Git</p>
       </li>
       <li>
         <span class="glyphicon glyphicon-calendar"></span>
         <h4>Run Events</h4>
-        <p>Easily host &amp; publish events online</p>
-        <p>Support for easy ticketing and iCal event feeds</p> 
+        <p>Easily publish &amp; ticket events online</p>
+        <p>Support for recurring meetings and iCal event feeds</p> 
       </li>
       <li>
         <span class="glyphicon glyphicon-envelope"></span>
         <h4>Mailing Lists</h4>
-        <p>If your group already has a mailing list, link it in!</p>
-        <p>Otherwise, make one on cliques! Free for groups &lt;20 people</p>
+        <p>Cliqu.es can host mailing lists for you for free!</p>
+        <p>Or link in an existing one you manage yourself</p>
       </li>
     </ul>
   </section>

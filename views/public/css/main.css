@@ -3,7 +3,6 @@
    ========================================================================== */
 
 body {
-  background-color: #2D4986;
   color: #FFF;
 }
 
@@ -14,11 +13,18 @@ h1, h2, h4 {
 section {
   padding-top: 20px;
   padding-bottom: 25px;
+}
+
+#intro {
+  background-color: #2D4986;
+  background: linear-gradient(to bottom, #2d4986 0%,#337c99 100%);
+  padding-left: 5px;
   min-height: 400px;
 }
 
 #features {
   background-color: #9D4034;
+  background: linear-gradient(to bottom, #9D4034 0%, #A65 100%);
 }
 
 #features ul {
@@ -35,17 +41,21 @@ section {
   height: 300px;
 }
 
+#features .glyphicon {
+  font-size: 128px;
+  text-shadow: 4px 4px 1px #BBB;
+  margin-bottom: 25px;
+}
+
 @media only screen and (min-width: 500px) {
+  #intro {
+    padding: 5% 20% 20%;
+  }
+
   #features li {
     display: inline-block;
     vertical-align: top;
     width: 25%;
     max-width: 275px;
   }
-}
-
-#features .glyphicon {
-  font-size: 128px;
-  text-shadow: 4px 4px 1px #BBB;
-  margin-bottom: 25px;
 }

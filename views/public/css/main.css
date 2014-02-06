@@ -22,6 +22,12 @@ section {
   min-height: 400px;
 }
 
+#interest {
+  background-color: #222;
+  background: linear-gradient(to bottom, #000 0%, #333 100%);
+  padding 15px 5px;
+}
+
 #features {
   background-color: #9D4034;
   background: linear-gradient(to bottom, #9D4034 0%, #A65 100%);
@@ -50,6 +56,10 @@ section {
 @media only screen and (min-width: 500px) {
   #intro {
     padding: 5% 20% 20%;
+  }
+
+  #interest {
+    padding: 15px 15%;
   }
 
   #features li {

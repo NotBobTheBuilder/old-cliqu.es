@@ -3,6 +3,15 @@
   	<h1>Welcome to Cliqu.es</h1>
     <h2>A service for better usergroup management</h2>
   </section>
+  <section id="interest">
+    <h1>We can email or tweet you as we roll out more features</h2>
+    <form class="input-group" method="POST" action="/notify">
+      <input class="form-control" type="text" placeholder="@yourtwitter | you@yoursite.com" />
+      <span class="input-group-btn">
+        <input class="btn btn-default" type="submit" value="register" />
+      </span>
+    </form>
+  </section>
   <section id="features">
     <ul>
       <li>

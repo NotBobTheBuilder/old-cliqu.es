@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS externauths;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS groups;
 DROP TABLE IF EXISTS users;
@@ -5,6 +6,13 @@ DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS groups_organisers;
 DROP TABLE IF EXISTS groups_members;
 DROP TABLE IF EXISTS events_organisers;
+
+CREATE TABLE externauths (
+  id,
+  flavour,
+  user_id,
+  PRIMARY KEY (flavour, id)
+);
 
 CREATE TABLE events (
   id                  INTEGER PRIMARY KEY AUTOINCREMENT,

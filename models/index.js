@@ -1,4 +1,5 @@
 var db  = require("./db"),
+    ExternAuth,
     Event,
     Group,
     Ticket,
@@ -19,6 +20,16 @@ Event = db.Model.extend({
 });
 Event.Events = db.Collection.extend({
   "model": Event,
+});
+
+ExternAuth = db.Model.extend({
+  "tableName": "externauths",
+  "user": function() {
+    return this.belongsTo(User);
+  },
+});
+ExternAuth.ExternAuths = db.Collection.extend({
+  "model": ExternAuth,
 });
 
 Group = db.Model.extend({
@@ -67,6 +78,9 @@ User = db.Model.extend({
   "organiser": function() {
     return this.belongsToMany(Group, "groups_organisers", "group_id", "organiser_id");
   },
+  "externauths": function() {
+    return this.hasMany(ExternAuth);
+  },
 });
 User.Users = db.Collection.extend({
   "model": User,
@@ -74,6 +88,7 @@ User.Users = db.Collection.extend({
 
 module.exports = {
   "Event": Event,
+  "ExternAuth": ExternAuth,
   "Group": Group,
   "Ticket": Ticket,
   "User": User,

@@ -21,7 +21,13 @@ module.exports = function(app, auth, views) {
   });
 
   app.get("/", function(req, res) {
-    res.render("index");
+    if (req.user) {
+      res.render("home", {
+        "user": req.user.toJSON(),
+      });
+    } else {
+      res.render("index");
+    }
   });
 
   app.get("/events/:id/ticket", function(req, res) {

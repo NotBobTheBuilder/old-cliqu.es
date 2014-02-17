@@ -1,0 +1,15 @@
+<article>
+  <header class="navbar navbar-static-top">
+    <div class="container">
+      <nav class="navbar-right">
+        Hi {{user.display_name}}!
+      </nav>
+    </div>
+  </header>
+  <section>
+
+  </section>
+  <section>
+
+  </section>
+</article>
